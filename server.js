@@ -1,15 +1,12 @@
-const express = require("express");
-const path = require("path");
-
+const express = require('express');
+const path = require('path');
 const app = express();
 
-app.set("port", process.env.PORT || 3000);
+app.listen(3000, function () {
+  console.log('listening on 3000')
+}); 
+app.use(express.static(path.join(__dirname, 'front/build')));
 
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/index.html"));
-});
-
-app.listen(app.get("port"), () => {
-  console.log(app.get("port"), "번 포트에서 대기중..");
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, '/front/build/index.html'));
 });
